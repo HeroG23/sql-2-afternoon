@@ -221,10 +221,11 @@ CREATE TABLE products(
     product_price INTEGER
 );
 CREATE TABLE orders(
-    order_id SERIAL,
+    order_id SERIAL PRIMARY KEY,
+    order_product_id
     order_name VARCHAR(40),
     order_price INTEGER,
-    FOREIGN KEY(order_id) 
+    FOREIGN KEY(order_product_id) 
     REFERENCES products(product_id)
 );
 
@@ -291,3 +292,10 @@ WHERE order_id = 1;
  
 SELECT * FROM orders;
 
+ALTER TABLE users
+ADD COLUMN order_id SERIAL 
+REFERENCES orders(order_id);
+
+ALTER TABLE orders
+ADD COLUMN user_id SERIAL 
+REFERENCES users(user_id);
