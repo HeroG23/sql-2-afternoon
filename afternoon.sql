@@ -227,14 +227,12 @@ CREATE TABLE users (
 CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR(40),
-    product_price INTEGER
+    product_price NUMERIC
 );
 CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
-    order_product_id
-    order_name VARCHAR(40),
-    order_price INTEGER,
-    FOREIGN KEY(order_product_id) 
+    product_id SERIAL
+    FOREIGN KEY(product_id) 
     REFERENCES products(product_id)
 );
 
@@ -320,3 +318,9 @@ FROM users u
 JOIN orders o 
 ON o.user_id = u.user_id
 WHERE u.user_id = 1;
+
+SELECT COUNT(*), u.user_id
+FROM orders o
+JOIN users u
+ON o.user_id = u.user_id
+GROUP BY u.user_id;
