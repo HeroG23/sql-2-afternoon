@@ -261,33 +261,36 @@ VALUES
 (2,1),
 (3,2);
 
---Get all products for the first order.
+--Get all products for the first order--
 SELECT * FROM products
 WHERE product_id = 1;
 
---Get the total cost of an order ( sum the price of all products on an order ).
+--All Orders--
+SELECT * FROM orders
+
+--Order Costs--
 SELECT SUM(product_price)
 FROM products p
 JOIN orders o
 ON o.product_id = p.product_id
 WHERE o.order_id = 1;
 
---Get all orders for a user.
+--User Orders==
 SELECT * 
 FROM users u
 JOIN orders o 
 ON o.user_id = u.user_id
 WHERE u.user_id = 1;
 
---Get how many orders each user has.
+--Number of orders a user has--
 SELECT COUNT(*), u.user_id
 FROM orders o
 JOIN users u
 ON o.user_id = u.user_id
 GROUP BY u.user_id;
 
---Black Diamond
---Get the total amount on all orders for each user.
+--Black Diamond--
+
 SELECT SUM(p.product_price), u.user_id
 FROM products p
 JOIN orders o
