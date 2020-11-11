@@ -299,3 +299,9 @@ REFERENCES orders(order_id);
 ALTER TABLE orders
 ADD COLUMN user_id SERIAL 
 REFERENCES users(user_id);
+
+SELECT SUM(product_price)
+FROM products p
+JOIN orders o
+ON o.product_id = p.product_id
+WHERE o.order_id = 1;
