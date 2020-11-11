@@ -177,15 +177,24 @@ FROM customer;
 
 --TABLE--
 CREATE TABLE practice_delete ( name TEXT, type TEXT, value INTEGER );
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'bronze', 50);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'bronze', 50);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'bronze', 50);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'silver', 100);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'silver', 100);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'gold', 150);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'gold', 150);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'gold', 150);
-INSERT INTO practice_delete ( name, type, value ) VALUES ('delete', 'gold', 150);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'bronze', 50);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'bronze', 50);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'bronze', 50);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'silver', 100);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'silver', 100);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'gold', 150);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'gold', 150);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'gold', 150);
+INSERT INTO practice_delete ( name, type, value ) 
+VALUES ('delete', 'gold', 150);
 
 SELECT * FROM practice_delete;
 
@@ -305,3 +314,9 @@ FROM products p
 JOIN orders o
 ON o.product_id = p.product_id
 WHERE o.order_id = 1;
+
+SELECT * 
+FROM users u
+JOIN orders o 
+ON o.user_id = u.user_id
+WHERE u.user_id = 1;
