@@ -221,96 +221,77 @@ WHERE value = 150;
 --TABLES
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    user_name VARCHAR(40),
-    user_email VARCHAR(300)
+    user_name VARCHAR(100),
+    user_email VARCHAR(100)
 );
-CREATE TABLE products(
+
+CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
-    product_name VARCHAR(40),
-    product_price NUMERIC
+    product_name VARCHAR(100),
+    product_price INTEGER
 );
-CREATE TABLE orders(
+
+CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
-    product_id INTEGER REFERENCES products(product_id),
+    user_id INT REFERENCES users(user_id),
+    product_id INT REFERENCES products(product_id)
 );
 
 --users--
-INSERT INTO users(
-    user_name,
-    user_email
-)
+INSERT INTO users 
+(user_name, user_email)
 VALUES
-(
-    'John',
-    'john-join@yahoo.com'
-),
-(
-    'Tabitha',
-    'T-babe265@aol.com'
-),
-(
-    'Regina',
-    'evil_queen677@outlook.com'
-);
+('JOHN Wall', 'john_wall@gmail.com'),
+('ALAN RICKMAN', 'alan_snape@outlook.com'),
+('IDIOTA RAMIREZ', 'idiota_ramirez12324@yahoo.com');
 
 --products--
-INSERT INTO products(
-    product_name,
-    product_price
-)
+INSERT INTO products
+(product_name, product_price)
 VALUES
-(
-    'TESLA',
-    1000000
-),
-(
-    'Billygoat',
-    26535
-),
-(
-    'Anteaters',
-    3605
-);
+('Tesla', 1235635),
+('Range Rover', 56265656),
+('Ford Fusion', 1);
 
 --orders--
-INSERT INTO orders(
-    product_id
-)
+INSERT INTO orders
+(user_id, product_id)
 VALUES
-(
-    1
-),
-(
-    2
-),
-(
-    3
-);
+(1,3),
+(2,1),
+(3,2);
 
---Queries--
-SELECT * FROM orders
-WHERE order_id = 1;
- 
-SELECT * FROM orders;
+--Get all products for the first order.
+SELECT * FROM products
+WHERE product_id = 1;
 
-ALTER TABLE orders
-ADD COLUMN user_id SERIAL 
-REFERENCES users(user_id);
-
+--Get the total cost of an order ( sum the price of all products on an order ).
 SELECT SUM(product_price)
 FROM products p
 JOIN orders o
 ON o.product_id = p.product_id
 WHERE o.order_id = 1;
 
+--Get all orders for a user.
 SELECT * 
 FROM users u
 JOIN orders o 
 ON o.user_id = u.user_id
 WHERE u.user_id = 1;
 
+--Get how many orders each user has.
 SELECT COUNT(*), u.user_id
 FROM orders o
 JOIN users u
 ON o.user_id = u.user_id
+GROUP BY u.user_id;
+
+--Black Diamond
+--Get the total amount on all orders for each user.
+SELECT SUM(p.product_price), u.user_id
+FROM products p
+JOIN orders o
+ON o.product_id = p.product_id
+JOIN users u
+ON u.user_id = o.user_id
 GROUP BY u.user_id;
