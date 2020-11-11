@@ -231,9 +231,7 @@ CREATE TABLE products(
 );
 CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
-    product_id SERIAL
-    FOREIGN KEY(product_id) 
-    REFERENCES products(product_id)
+    product_id INTEGER REFERENCES products(product_id),
 );
 
 --users--
@@ -276,21 +274,17 @@ VALUES
 
 --orders--
 INSERT INTO orders(
-    order_name,
-    order_price
+    product_id
 )
 VALUES
 (
-    'Tesla Goats',
-    51654154
+    1
 ),
 (
-    'Ant Goats',
-    215653213
+    2
 ),
 (
-    'Tesla Ants',
-    545684868
+    3
 );
 
 --Queries--
@@ -298,10 +292,6 @@ SELECT * FROM orders
 WHERE order_id = 1;
  
 SELECT * FROM orders;
-
-ALTER TABLE users
-ADD COLUMN order_id SERIAL 
-REFERENCES orders(order_id);
 
 ALTER TABLE orders
 ADD COLUMN user_id SERIAL 
